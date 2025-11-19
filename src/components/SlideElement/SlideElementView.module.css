@@ -1,0 +1,23 @@
+.slideElement {
+  position: absolute;
+  user-select: none;
+}
+
+.textElement {
+  display: flex;
+  align-items: flex-start;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.textElement:hover {
+  outline: 2px dashed #007bff;
+}
+
+.imageElement {
+  object-fit: contain;
+}
+
+.imageElement:hover {
+  outline: 2px dashed #007bff;
+}

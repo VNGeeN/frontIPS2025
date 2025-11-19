@@ -1,0 +1,197 @@
+.presentationDemo {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.demoHeader {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.demoHeader h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.demoControls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.demoControls button {
+  padding: 10px 20px;
+  border: 2px solid #007bff;
+  background: white;
+  color: #007bff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.demoControls button:hover {
+  background: #007bff;
+  color: white;
+}
+
+.active {
+  background: #007bff !important;
+  color: white !important;
+}
+
+.toggleThumbnails {
+  background: #28a745 !important;
+  border-color: #28a745 !important;
+  color: white !important;
+}
+
+.toggleThumbnails:hover {
+  background: #218838 !important;
+  border-color: #1e7e34 !important;
+}
+
+.demoContent {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.presentationContainer {
+  flex: 1;
+  min-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.demoPresentation {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.thumbnailsPanel {
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Добавляем порядок для размещения слева */
+  order: -1;
+}
+
+.thumbnailsPanel h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.thumbnailsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.thumbnailItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.thumbnailItem:hover {
+  background-color: #f8f9fa;
+}
+
+.thumbnailInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  color: #666;
+}
+
+.thumbnailInfo span:first-child {
+  font-weight: 600;
+}
+
+.demoInfo {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.demoInfo h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.infoItem label {
+  font-weight: 600;
+  color: #555;
+  font-size: 14px;
+}
+
+.infoItem span {
+  color: #333;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .demoContent {
+    flex-direction: column;
+  }
+  
+  .thumbnailsPanel {
+    width: 100%;
+    order: 0; /* В мобильной версии возвращаем обычный порядок */
+  }
+  
+  .presentationContainer {
+    min-width: unset;
+  }
+  
+  .demoControls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .demoControls button {
+    width: 200px;
+  }
+}

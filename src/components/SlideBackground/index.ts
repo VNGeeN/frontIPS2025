@@ -1,0 +1,1 @@
+export { SlideBackgroundView } from './SlideBackgroundView';

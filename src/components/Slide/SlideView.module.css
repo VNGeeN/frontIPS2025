@@ -1,0 +1,18 @@
+.slide {
+  position: relative;
+  background: white;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slideCurrent {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.slideElements {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
