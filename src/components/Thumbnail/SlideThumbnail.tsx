@@ -7,7 +7,7 @@ interface SlideThumbnailProps {
   slide: Slide;
   isSelected: boolean;
   isCurrent: boolean;
-  onClick: (slideId: string) => void;
+  onClick?: (slideId: string) => void;
   width?: number;
   height?: number;
 }
@@ -32,7 +32,7 @@ export const SlideThumbnail: React.FC<SlideThumbnailProps> = ({
   return (
     <div 
       className={thumbnailClasses}
-      onClick={() => onClick(slide.id)}
+      onClick={() => onClick?.(slide.id)}
       style={{ width, height }}
     >
       <div className={styles.thumbnailBackground}>

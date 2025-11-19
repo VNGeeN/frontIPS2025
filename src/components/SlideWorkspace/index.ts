@@ -1,0 +1,1 @@
+export { SlideWorkspaceView } from './SlideWorkspaceView';

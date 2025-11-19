@@ -1,16 +1,10 @@
-import React from 'react';
 import { PresentationDemo } from './components';
-import { minimalPresentation, maximalPresentation } from './test-data/presentations';
+import { maximalPresentation } from './test-data/presentations';
 
-function App() {
+export function App() {
   return (
     <div className="App">
-      <PresentationDemo 
-        minimalPresentation={minimalPresentation}
-        maximalPresentation={maximalPresentation}
-      />
+      <PresentationDemo presentation={maximalPresentation} />
     </div>
   );
 }
-
-export default App;

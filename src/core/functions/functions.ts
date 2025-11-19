@@ -703,7 +703,7 @@ const getSlideById = (presentation: Presentation, id: string): Slide => {
   return { ...slide };
 };
 
-const getSlideIndexById = (presentation: Presentation, id: string): number => {
+export const getSlideIndexById = (presentation: Presentation, id: string): number => {
   return presentation.slideCollection.slides.findIndex(slide => slide.id === id);
 };
 
