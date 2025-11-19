@@ -3,13 +3,13 @@ import { Presentation } from '../../core/types/type';
 import { SlideView } from '../SlideView';
 import { SlideThumbnail } from '../Thumbnail';
 
-import styles from './PresentationDemo.module.css';
+import styles from './PresentationView.module.css';
 
-interface PresentationDemoProps {
+interface PresentationProps {
   presentation: Presentation;
 }
 
-export const PresentationDemo: React.FC<PresentationDemoProps> = ({
+export const PresentationView: React.FC<PresentationProps> = ({
   presentation
 }) => {
   const handleSlideElementClick = (elementId: string) => {

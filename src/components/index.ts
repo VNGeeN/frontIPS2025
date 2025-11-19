@@ -3,4 +3,4 @@ export { SlideWorkspaceView as SlideView } from './SlideWorkspace/SlideWorkspace
 export { SlideElementView } from './SlideElement/SlideElementView';
 export { SlideBackgroundView } from './SlideBackground/SlideBackgroundView';
 export { SlideThumbnail } from './Thumbnail/SlideThumbnail';
-export { PresentationDemo } from './PresentationDemo/PresentationDemo';
+export { PresentationView as PresentationDemo } from './PresentationView/PresentationVIew';

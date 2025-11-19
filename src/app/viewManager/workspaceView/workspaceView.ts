@@ -1,5 +1,5 @@
 import { PresentationModel } from "../../presentationModel/presentationModel";
-import { Slide, SlideBackground, SlideElement, TextType, ImageType } from "../../../presentation/types/type";
+import { Slide, SlideBackground, SlideElement, TextType, ImageType } from "../../../oldPresentation/types/type";
 
 export class WorkspaceView {
     private container: HTMLElement;

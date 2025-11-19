@@ -11,7 +11,7 @@ import {
     SlideBackground,
     BackgroundImage,
     BackgroundColor
-} from '../../presentation/types/type';
+} from '../../oldPresentation/types/type';
 
 import { EventManager } from '../eventManager/eventManager';
 import { EventType } from "../types/eventTypes";
