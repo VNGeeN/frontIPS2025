@@ -1,1 +1,1 @@
-export { SlideThumbnail } from './SlideThumbnail';
+// export { SlideThumbnail } from './SlideThumbnail';

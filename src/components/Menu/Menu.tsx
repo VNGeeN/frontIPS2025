@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Presentation } from '../../core/types/type';
+import { Presentation } from '../../core/types/presentationTypes';
 import styles from './Menu.module.css';
 
 interface MenuProps {

@@ -1,70 +1,70 @@
-import { getSlideIndexById } from '../../core';
-import { Presentation } from '../../core/types/type';
-import { SlideView } from '../SlideView';
-import { SlideThumbnail } from '../Thumbnail';
+// import { getSlideIndexById } from '../../core';
+// import { Presentation } from '../../core/types/presentationTypes';
+// import { SlideView } from '../SlideView';
+// import { SlideThumbnail } from '../Thumbnail';
 
-import styles from './PresentationView.module.css';
+// import styles from './PresentationView.module.css';
 
-interface PresentationProps {
-  presentation: Presentation;
-}
+// interface PresentationProps {
+//   presentation: Presentation;
+// }
 
-export const PresentationView: React.FC<PresentationProps> = ({
-  presentation
-}) => {
-  const handleSlideElementClick = (elementId: string) => {
-    console.log(elementId, presentation.slideCollection.slides.find(slide => slide.id === elementId)?.slideElements)
-  }
+// export const PresentationView: React.FC<PresentationProps> = ({
+//   presentation
+// }) => {
+//   const handleSlideElementClick = (elementId: string) => {
+//     console.log(elementId, presentation.slideCollection.slides.find(slide => slide.id === elementId)?.slideElements)
+//   }
 
-  const handleThumbnailClick = (slideId: string) => {
-    console.log(slideId, getSlideIndexById(presentation, slideId))
-  }
+//   const handleThumbnailClick = (slideId: string) => {
+//     console.log(slideId, getSlideIndexById(presentation, slideId))
+//   }
 
-  return (
-    <div className={styles.presentationDemo}>
-      <header className={styles.demoHeader}>
-        <h1>Presentation Demo</h1>
-        <div className={styles.demoControls}>
-          {/* <button 
-            onClick={() => setShowThumbnails(!showThumbnails)}
-            className={styles.toggleThumbnails}
-          >
-            {showThumbnails ? 'Hide' : 'Show'} Thumbnails
-          </button> */}
-        </div>
-      </header>
+//   return (
+//     <div className={styles.presentationDemo}>
+//       <header className={styles.demoHeader}>
+//         <h1>Presentation Demo</h1>
+//         <div className={styles.demoControls}>
+//           {/* <button 
+//             onClick={() => setShowThumbnails(!showThumbnails)}
+//             className={styles.toggleThumbnails}
+//           >
+//             {showThumbnails ? 'Hide' : 'Show'} Thumbnails
+//           </button> */}
+//         </div>
+//       </header>
 
-      <div className={styles.demoContent}>
-        <div className={styles.thumbnailsPanel}>
-          <h3>Slides</h3>
-          <div className={styles.thumbnailsGrid}>
-            {presentation.slideCollection.slides.map((slide, index) => (
-              <div key={slide.id} className={styles.thumbnailItem}>
-                <SlideThumbnail
-                  slide={slide}
-                  isSelected={presentation.state.selectedSlides.includes(slide.id)}
-                  isCurrent={presentation.state.currentSlide === slide.id}
-                  width={150}
-                  height={100}
-                  onElementClick={handleThumbnailClick}
-                />
-                <div className={styles.thumbnailInfo}>
-                  <span>Slide {index + 1}</span>
-                  <span>{slide.slideElements.length} elements</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+//       <div className={styles.demoContent}>
+//         <div className={styles.thumbnailsPanel}>
+//           <h3>Slides</h3>
+//           <div className={styles.thumbnailsGrid}>
+//             {presentation.slideCollection.slides.map((slide, index) => (
+//               <div key={slide.id} className={styles.thumbnailItem}>
+//                 <SlideThumbnail
+//                   slide={slide}
+//                   isSelected={presentation.state.selectedSlides.includes(slide.id)}
+//                   isCurrent={presentation.state.currentSlide === slide.id}
+//                   width={150}
+//                   height={100}
+//                   onElementClick={handleThumbnailClick}
+//                 />
+//                 <div className={styles.thumbnailInfo}>
+//                   <span>Slide {index + 1}</span>
+//                   <span>{slide.slideElements.length} elements</span>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
 
-        <div className={styles.presentationContainer}>
-          <SlideView
-            className={styles.demoPresentation}
-            presentation={presentation}
-            onElementClick={handleSlideElementClick}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
+//         <div className={styles.presentationContainer}>
+//           <SlideView
+//             className={styles.demoPresentation}
+//             presentation={presentation}
+//             onElementClick={handleSlideElementClick}
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
