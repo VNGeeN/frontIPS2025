@@ -10,6 +10,7 @@ interface SlideThumbnailProps {
   onClick?: (slideId: string) => void;
   width?: number;
   height?: number;
+  onElementClick?: (slideId: string) => void;
 }
 
 export const SlideThumbnail: React.FC<SlideThumbnailProps> = ({
@@ -18,7 +19,8 @@ export const SlideThumbnail: React.FC<SlideThumbnailProps> = ({
   isCurrent,
   onClick,
   width = 120,
-  height = 80
+  height = 80,
+  onElementClick
 }) => {
   const scaleX = width / 800;
   const scaleY = height / 600;
@@ -26,7 +28,7 @@ export const SlideThumbnail: React.FC<SlideThumbnailProps> = ({
   const thumbnailClasses = [
     styles.slideThumbnail,
     isSelected ? styles.selected : '',
-    isCurrent ? styles.current : ''
+    isCurrent ? styles.current : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -35,6 +37,7 @@ export const SlideThumbnail: React.FC<SlideThumbnailProps> = ({
       onClick={() => onClick?.(slide.id)}
       style={{ width, height }}
     >
+      
       <div className={styles.thumbnailBackground}>
         <SlideBackgroundView background={slide.background} />
       </div>

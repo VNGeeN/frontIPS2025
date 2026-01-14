@@ -46,6 +46,7 @@ export const PresentationView: React.FC<PresentationProps> = ({
                   isCurrent={presentation.state.currentSlide === slide.id}
                   width={150}
                   height={100}
+                  onElementClick={handleThumbnailClick}
                 />
                 <div className={styles.thumbnailInfo}>
                   <span>Slide {index + 1}</span>
