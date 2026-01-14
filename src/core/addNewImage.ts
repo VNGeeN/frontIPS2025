@@ -1,12 +1,8 @@
 import { type Editor } from "./types/editorTypes";
-import { SLIDE_WIDTH } from "../views/presentation/slide/SlideConst";
-import { SLIDE_HEIGHT } from "../views/presentation/slide/SlideConst";
+import { SLIDE_WIDTH } from "../views/presentation/slide/Slide";
+import { SLIDE_HEIGHT } from "../views/presentation/slide/Slide";
 import { type ImageObject } from "./types/presentationTypes";
 import { defaultImageElement } from "./functions/functions";
-
-
-//
-
 
 function addNewImage(editor: Editor): Editor {
     console.log('editor', editor)
@@ -15,11 +11,8 @@ function addNewImage(editor: Editor): Editor {
     }
     const newElement: ImageObject = structuredClone(defaultImageElement)
     newElement.id = crypto.randomUUID()
-    newElement.position.x = (SLIDE_HEIGHT - 150) / 2
-    newElement.position.y = (SLIDE_WIDTH - 200) / 2
-    newElement.position.angle = 0
-    newElement.size.width = 200
-    newElement.size.height = 150
+    newElement.position.x = (SLIDE_WIDTH - newElement.size.width) / 2
+    newElement.position.y = (SLIDE_HEIGHT - newElement.size.height) / 2
     const currentSlideId = editor.slideSelection[editor.slideSelection.length - 1]
     const newSlides = editor.presentation.slides.map((slide) => {
         if (slide.id !== currentSlideId) {
@@ -35,12 +28,7 @@ function addNewImage(editor: Editor): Editor {
         presentation: {
             ...editor.presentation,
             slides: newSlides,
-        },
-        elementSelection: [newElement.id],
-        interfaceState: {
-            ...editor.interfaceState,
-            editBarState: "image"
-        } 
+        }
     }
 }
 

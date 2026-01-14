@@ -1025,8 +1025,8 @@ export const setSlideBackgroundType = (
 ): Presentation => {
   const setBackground = (): Background =>
     backgroundType === 'solid'
-      ? { type: { type: 'solid', color: '#ffffff' } }
-      : { type: { type: 'image', src: 'path/to/default/image' } };
+      ? { type: 'solid', color: '#ffffff' }
+      : { type: 'image', src: 'path/to/default/image' };
 
   return {
     ...presentation,
@@ -1048,7 +1048,7 @@ export const setSlideBackgroundColor = (
   slides: presentation.slides.map(slide =>
     !isForAll && slide.id !== currentSlideId
       ? slide
-      : { ...slide, background: { type: { type: 'solid', color: backgroundColor } } }
+      : { ...slide, background: { type: 'solid', color: backgroundColor } }
   )
 });
 
@@ -1062,7 +1062,7 @@ export const setSlideBackgroundImage = (
   slides: presentation.slides.map(slide =>
     !isForAll && slide.id !== currentSlideId
       ? slide
-      : { ...slide, background: { type: { type: 'image', src: imageSrc } } }
+      : { ...slide, background: { type: 'image', src: imageSrc } }
   )
 });
 
@@ -1075,10 +1075,27 @@ export const defaultImageElement: ImageObject = {
   position: {
     x: 0,
     y: 0,
-    angle: 0
   },
   size: {
     width: 0,
     height: 0
   }
 };
+
+export const defaultTextElement: TextObject = {
+    type: "text",
+    value: "New text",
+    fontFamily: "Montserrat",
+    fontSize: 30,
+    fontWeight: 400,
+    fontColor: "#000000",
+    id: "",
+    position: {
+        x: 0,
+        y: 0
+    },
+    size: {
+        width: 140,
+        height: 50
+    }
+}

@@ -1,74 +1,35 @@
+import { CSSProperties } from "react";
 import { type TextObject } from "../../../../core/types/presentationTypes";
 import styles from './TextObject.module.css'
-import { dispatch } from "../../../../core/editor";
-import { changeTextValue } from "../../../../core/changeTextValue";
-import { selectOneElement } from "../../../../core/setSelection";
-import { addToElementSelection } from "../../../../core/setSelection";
 
-import { CSSProperties, useState } from "react";
+import { dispatch } from "../../../../core/editor";
+
+import { changeTextValue } from "../../../../core/changeTextValue";
 
 type TextProps = {
-    object: TextObject,
-    scale: number,
-    isSelected?: boolean
+    value: string,
+    fontFamily: string,
+    fontSize: number,
+    fontWeight: number,
+    fontColor: string
 }
 
-function TextObject({ object, scale, isSelected }: TextProps) {
+function TextObject({ value, fontFamily, fontSize, fontWeight, fontColor }: TextProps) {
     const textStyles: CSSProperties = {
-        position: "absolute",
-        boxSizing: "border-box",
-        padding: 0,
-        margin: 0,
-        top: `${object.position.x * scale}px`,
-        left: `${object.position.y * scale}px`,
-        width: `${object.size.width * scale}px`,
-        height: `${object.size.height * scale}px`,
-        // transform: `rotate(${object.position.angle}deg)`,
-        fontFamily: `${object.fontFamily}`,
-        fontSize: `${object.fontSize * scale}px`,
-        fontWeight: object.fontWeight,
-        color: `${object.fontColor}`,
-        backgroundColor: "transparent"
+        fontFamily: `${fontFamily}`,
+        fontSize: `${fontSize}px`,
+        fontWeight: `${fontWeight}`,
+        color: `${fontColor}`,
     }
-    if (isSelected) {
-        textStyles.border = "solid 0.5px #4071db"
-    }
-
-    const onElementClick = (elemId: string, event: React.MouseEvent) => {
-        if (event.ctrlKey) {
-            dispatch(addToElementSelection, elemId)
-        } else {
-            dispatch(selectOneElement, elemId)
-        }
-    }
-
-    const [editMode, setEditMode] = useState(false)
-
     return (
-        <div>
-            {!editMode &&
-                <div
-                    style={textStyles}
-                    className={styles.textObjectDiv}
-                    onClick={(event) => { onElementClick(object.id, event) }}
-                    onDoubleClick={() => {setEditMode(true)}}
-                >
-                    {object.value}
-                </div>
-            }
-            {editMode &&
-                <textarea
-                    style={textStyles}
-                    className={styles.textObjectInput}
-                    wrap="soft"
-                    onChange={(event) => {
-                        dispatch(changeTextValue, (event.target as HTMLTextAreaElement).value)
-                    }}
-                    onBlur={() => {setEditMode(false)}}
-                    value={object.value}
-                />
-            }
-        </div>
+        <textarea
+            style={textStyles}
+            className={styles.textObjectInput}
+            onChange={(event) => {
+                dispatch(changeTextValue, (event.target as HTMLTextAreaElement).value)
+            }}
+            value={value}
+        />
     )
 }
 

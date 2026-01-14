@@ -12,7 +12,6 @@ const elem1: ImageObject = {
     position: {
         x: 80,
         y: 230,
-        angle: 0
     },
     size: {
         width: 150,
@@ -30,7 +29,6 @@ const elem2: TextObject = {
     position: {
         x: 180,
         y: 200,
-        angle: 0
     },
     size: {
         width: 200,
@@ -48,7 +46,6 @@ const elem3: TextObject = {
     position: {
         x: 130,
         y: 100,
-        angle: 0
     },
     size: {
         width: 200,
@@ -63,7 +60,6 @@ const elem4: ImageObject = {
     position: {
         x: 30,
         y: 430,
-        angle: 0
     },
     size: {
         width: 150,
@@ -81,7 +77,6 @@ const elem5: TextObject = {
     position: {
         x: 300,
         y: 50,
-        angle: 0
     },
     size: {
         width: 200,
@@ -99,7 +94,6 @@ const elem6: TextObject = {
     position: {
         x: 200,
         y: 500,
-        angle: 0
     },
     size: {
         width: 200,
@@ -113,7 +107,6 @@ const elem7: ImageObject = {
     position: {
         x: 270,
         y: 130,
-        angle: 0
     },
     size: {
         width: 80,
@@ -123,50 +116,40 @@ const elem7: ImageObject = {
 const slide1: Slide = {
     id: "1",
     background: {
-        type: {
-            type: "image",
-            src: ""
-        }
+        type: "image",
+        src: ""
     },
     objects: [elem3, elem2, elem1, elem7]
 }
 const slide2: Slide = {
     id: "2",
     background: {
-        type: {
-            type: "solid",
-            color: "#ffff00"
-        }
+        type: "solid",
+        color: "#ffff00"
     },
     objects: [elem4, elem5, elem6]
 }
 const slide3: Slide = {
     id: "3",
     background: {
-        type: {
-            type: "solid",
-            color: "#00ff00"
-        }
+        type: "solid",
+        color: "#00ff00"
     },
     objects: []
 }
 const slide4: Slide = {
     id: "4",
     background: {
-        type: {
-            type: "solid",
-            color: "#ff0000"
-        }
+        type: "solid",
+        color: "#ff0000"
     },
     objects: []
 }
 const slide5: Slide = {
     id: "5",
     background: {
-        type: {
-            type: "solid",
-            color: "#ff00ff"
-        }
+        type: "solid",
+        color: "#ff00ff"
     },
     objects: []
 }
@@ -180,7 +163,7 @@ const presentation: Presentation = {
 
 const editor: Editor = {
     presentation: presentation,
-    slideSelection: ["1","2"],
+    slideSelection: ["1", "2"],
     elementSelection: ["5"],
     interfaceState: {
         optionsBarState: "file",

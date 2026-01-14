@@ -1,13 +1,8 @@
-import { type Slide } from "../../../core/types/presentationTypes";
-import { ImageObject } from "../slide-object/image-object/ImageObject";
-import { TextObject } from "../slide-object/text-object/TextObject";
-import { dispatch } from "../../../core/editor";
-import { selectOneElement } from "../../../core/setSelection";
-import { addToElementSelection, clearElementSelection } from "../../../core/setSelection";
-import { SLIDE_HEIGHT, SLIDE_WIDTH} from "./SlideConst"
-
+import { CSSProperties, useEffect, useRef } from "react";
+import { type Slide, type Position } from "../../../core/types/presentationTypes";
+import { SlideObject } from "../slide-object/SlideObject";
 import styles from './Slide.module.css'
-import { CSSProperties } from "react";
+import { SLIDE_HEIGHT, SLIDE_WIDTH } from './SlideConst'
 
 // const SLIDE_WIDTH = 935
 // const SLIDE_HEIGHT = 525
@@ -18,8 +13,13 @@ type SlideProps = {
     elementSelection?: string[]
 }
 
+let slideStart: Position = {
+    x: 0,
+    y: 0,
+}
+
 function Slide({ slide, scale, elementSelection }: SlideProps) {
-    function isElementSelected(array: string[] | undefined, objectId: string): boolean | undefined {
+    const isElementSelected = (array: string[] | undefined, objectId: string): boolean | undefined => {
         let selected: boolean = false
         array?.forEach((element) => {
             if (element === objectId) {
@@ -28,21 +28,26 @@ function Slide({ slide, scale, elementSelection }: SlideProps) {
         })
         return selected
     }
-
+    const slideRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        let rect = slideRef.current?.getBoundingClientRect()
+        if (rect) {
+            slideStart.x = rect.x
+            slideStart.y = rect.y
+        }
+    }, [])
     let slideStyles: CSSProperties = {}
-    switch (slide.background.type.type) {
+    switch (slide.background.type) {
         case "solid":
             slideStyles = {
-                position: "relative",
-                backgroundColor: slide.background.type.color,
+                backgroundColor: slide.background.color,
                 width: `${SLIDE_WIDTH * scale}px`,
                 height: `${SLIDE_HEIGHT * scale}px`,
             }
             break
         case "image":
             slideStyles = {
-                position: "relative",
-                backgroundImage: `url(${slide.background.type.src})`,
+                backgroundImage: `url(${slide.background.src})`,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
@@ -51,49 +56,24 @@ function Slide({ slide, scale, elementSelection }: SlideProps) {
             }
             break
         default:
-            throw new Error(`Unknown background type: ${slide.background.type}`)
+            throw new Error(`Unknown background type on slide: ${slide.id}`)
     }
 
-    // const MouseDownHandler = (object: ImageObject | TextObject, event: React.MouseEvent) => {
-    //     if (!isElementSelected(elementSelection, object.id)) {
-    //         if (event.ctrlKey) {
-    //             dispatch(addToElementSelection, object.id)
-    //         } else {
-    //             dispatch(selectOneElement, object.id)
-    //         }
-    //         console.log(event.pageX)
-    //         console.log(event.pageY)
-    //     }
-    // }
-
-    const onClickHandler = (event: React.MouseEvent) => {
-        if (event.altKey) {
-            dispatch(clearElementSelection)
-        }
+    const onClearElementSelection = (event: React.KeyboardEvent) => {
+        console.log('Clear element selection')
     }
-        
+
     return (
-        <div style={slideStyles} className={styles.slide} onClick={ onClickHandler }>
+        <div ref={slideRef} style={slideStyles} className={styles.slide} onKeyDown={onClearElementSelection}>
             {slide.objects.map(object => {
-                switch (object.type) {
-                    //оборачивать в компонент Selectable-resizeble-moveable-object
-                    case "text":
-                        return <TextObject
-                            key={object.id}
-                            object={object}
-                            scale={scale}
-                            isSelected={isElementSelected(elementSelection, object.id)}
-                        />
-                    case "image":
-                        return <ImageObject
-                            key={object.id}
-                            object={object}
-                            scale={scale}
-                            isSelected={isElementSelected(elementSelection, object.id)}
-                        />
-                    default:
-                        throw new Error(`Unknown slide-object type: ${object}`)
-                }
+                return (
+                    <SlideObject
+                        key={object.id}
+                        object={object}
+                        scale={scale}
+                        isSelected={isElementSelected(elementSelection, object.id)}
+                    />
+                )
             }
             )}
         </div>
@@ -103,5 +83,6 @@ function Slide({ slide, scale, elementSelection }: SlideProps) {
 export {
     Slide,
     SLIDE_WIDTH,
-    SLIDE_HEIGHT
+    SLIDE_HEIGHT,
+    slideStart
 }

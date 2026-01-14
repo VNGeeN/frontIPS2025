@@ -1,14 +1,12 @@
 import { type Editor } from "./types/editorTypes";
-import { type Background } from "./types/presentationTypes";
+import { type ImageBackground } from "./types/presentationTypes";
 
 
 function setSlideBackgroundImage(editor: Editor, backgroundImage: string): Editor {
-    function setBackground(srcStr: string): Background {
+    function setBackground(srcStr: string): ImageBackground {
         return {
-            type: {
-                type: "image",
-                src: srcStr
-            }
+            type: "image",
+            src: srcStr
         }
     }
     const newSlides = structuredClone(editor.presentation.slides)

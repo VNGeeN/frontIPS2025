@@ -1,16 +1,13 @@
-// import * as React from "react";
-
-import styles from './EditBar.module.css'
-import { Button } from '../../../../components/Button'
 import { type EditBarState } from '../../../../core/types/editorTypes'
+import { Button } from '../../../../components/Button'
+import styles from './EditBar.module.css'
+
 import { dispatch } from '../../../../core/editor'
+
 import { setSlideBackgroundColor } from '../../../../core/setSlideBackgroundColor'
 import { setSlideBackgroundImage } from '../../../../core/setSlideBackgroundImage'
 import { changeImage } from '../../../../core/changeImage'
 import { incSlideObjectLayer } from '../../../../core/incSlideObjectLayer'
-
-
-
 
 type EditBarProps = {
     type: EditBarState
@@ -40,7 +37,7 @@ function EditBar(props: EditBarProps) {
                     <Button className={styles.button} text={'Size'} onClick={() => { }}></Button>
                     <Button className={styles.button} text={'Weight'} onClick={() => { }}></Button>
                     <Button className={styles.button} text={'Color'} onClick={() => { }}></Button>
-                    <Button className={styles.button} text={'Up to layer'} onClick={() => {dispatch(incSlideObjectLayer)}}></Button>
+                    <Button className={styles.button} text={'Up to layer'} onClick={() => { dispatch(incSlideObjectLayer) }}></Button>
                     <Button className={styles.button} text={'Down to layer'} onClick={() => { }}></Button>
                 </div>
             )
@@ -49,14 +46,13 @@ function EditBar(props: EditBarProps) {
                 <div className={styles.editBar}>
                     <div className={styles.editBarTitle}>Editor mode (Image)</div>
                     <div className={styles.inputImage}>
-                            <input
-                                className={styles.hiddenInput}
-                                type={"file"}
-                                onChange={(event) => { onChangeImage(event, changeImage) }}
-                            />
-                            Change image
-                        </div>
-
+                        <input
+                            className={styles.hiddenInput}
+                            type={"file"}
+                            onChange={(event) => { onChangeImage(event, changeImage) }}
+                        />
+                        Change image
+                    </div>
                     <Button className={styles.button} text={'Up to layer'} onClick={() => { }}></Button>
                     <Button className={styles.button} text={'Down to layer'} onClick={() => { }}></Button>
                 </div>
