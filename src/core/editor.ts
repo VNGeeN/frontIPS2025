@@ -1,7 +1,7 @@
 import { Editor } from './types/editorTypes'
-import { editor } from './test-data'
+import { defaultEditor } from './test-data'
 
-let _editor: Editor = editor
+let _editor: Editor = defaultEditor
 let _handler: Function
 
 function getEditor() {

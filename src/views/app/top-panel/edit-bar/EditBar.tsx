@@ -1,34 +1,30 @@
-import { type EditBarState } from '../../../../core/types/editorTypes'
 import { Button } from '../../../../components/Button'
 import styles from './EditBar.module.css'
+import { useEditBarStateSelector } from "../../../hooks/useAppSelector";
+import { useAppActions } from "../../../hooks/useAppActions";
 
-import { dispatch } from '../../../../core/editor'
-
-import { setSlideBackgroundColor } from '../../../../core/setSlideBackgroundColor'
-import { setSlideBackgroundImage } from '../../../../core/setSlideBackgroundImage'
-import { changeImage } from '../../../../core/changeImage'
-import { incSlideObjectLayer } from '../../../../core/incSlideObjectLayer'
-
-type EditBarProps = {
-    type: EditBarState
-}
-
-function onChangeImage(event: React.FormEvent<HTMLInputElement>, func: Function) {
+function onChangeImage(event: React.ChangeEvent<HTMLInputElement>, callbackFunction: Function) {
     const target = event.target as HTMLInputElement & {
         files: FileList
     }
     const reader = new FileReader()
     reader.onload = () => {
         if (typeof reader.result === "string") {
-            dispatch(func, reader.result)
+            callbackFunction(reader.result)
         }
     }
     reader.readAsDataURL(target.files[0])
 }
 
-function EditBar(props: EditBarProps) {
-    let selectedBackgroundColor: string = ""
-    switch (props.type) {
+function EditBar() {
+    const editBarState = useEditBarStateSelector()
+    const { setSlideBackgroundColor } = useAppActions()
+    const { setSlideBackgroundImage } = useAppActions()
+    const { changeImage } = useAppActions()
+    const { incSlideObjectLayer } = useAppActions()
+    const { decSlideObjectLayer } = useAppActions()
+    let selectedBackgroundColor: string = "#000000"
+    switch (editBarState) {
         case "text":
             return (
                 <div className={styles.editBar}>
@@ -37,8 +33,8 @@ function EditBar(props: EditBarProps) {
                     <Button className={styles.button} text={'Size'} onClick={() => { }}></Button>
                     <Button className={styles.button} text={'Weight'} onClick={() => { }}></Button>
                     <Button className={styles.button} text={'Color'} onClick={() => { }}></Button>
-                    <Button className={styles.button} text={'Up to layer'} onClick={() => { dispatch(incSlideObjectLayer) }}></Button>
-                    <Button className={styles.button} text={'Down to layer'} onClick={() => { }}></Button>
+                    <Button className={styles.button} text={'Up to layer'} onClick={() => { incSlideObjectLayer() }}></Button>
+                    <Button className={styles.button} text={'Down to layer'} onClick={() => { decSlideObjectLayer() }}></Button>
                 </div>
             )
         case "image":
@@ -53,8 +49,8 @@ function EditBar(props: EditBarProps) {
                         />
                         Change image
                     </div>
-                    <Button className={styles.button} text={'Up to layer'} onClick={() => { }}></Button>
-                    <Button className={styles.button} text={'Down to layer'} onClick={() => { }}></Button>
+                    <Button className={styles.button} text={'Up to layer'} onClick={() => { incSlideObjectLayer() }}></Button>
+                    <Button className={styles.button} text={'Down to layer'} onClick={() => { decSlideObjectLayer() }}></Button>
                 </div>
             )
         case "slide":
@@ -81,7 +77,7 @@ function EditBar(props: EditBarProps) {
                         <Button
                             className={styles.selectButton}
                             text={'Apply'}
-                            onClick={() => { dispatch(setSlideBackgroundColor, selectedBackgroundColor) }}
+                            onClick={() => { setSlideBackgroundColor(selectedBackgroundColor) }}
                         />
                     </div>
                 </div>

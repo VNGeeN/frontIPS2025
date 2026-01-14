@@ -2,7 +2,8 @@ import { CSSProperties, useEffect, useRef } from "react";
 import { type Slide, type Position } from "../../../core/types/presentationTypes";
 import { SlideObject } from "../slide-object/SlideObject";
 import styles from './Slide.module.css'
-import { SLIDE_HEIGHT, SLIDE_WIDTH } from './SlideConst'
+import { useElementSelectionSelector } from "../../hooks/useAppSelector";
+import {SLIDE_HEIGHT, SLIDE_WIDTH} from './SlideConst'
 
 // const SLIDE_WIDTH = 935
 // const SLIDE_HEIGHT = 525
@@ -10,7 +11,6 @@ import { SLIDE_HEIGHT, SLIDE_WIDTH } from './SlideConst'
 type SlideProps = {
     slide: Slide,
     scale: number,
-    elementSelection?: string[]
 }
 
 let slideStart: Position = {
@@ -18,7 +18,8 @@ let slideStart: Position = {
     y: 0,
 }
 
-function Slide({ slide, scale, elementSelection }: SlideProps) {
+function Slide({ slide, scale}: SlideProps) {
+    const elementSelection = useElementSelectionSelector()
     const isElementSelected = (array: string[] | undefined, objectId: string): boolean | undefined => {
         let selected: boolean = false
         array?.forEach((element) => {
@@ -59,12 +60,8 @@ function Slide({ slide, scale, elementSelection }: SlideProps) {
             throw new Error(`Unknown background type on slide: ${slide.id}`)
     }
 
-    const onClearElementSelection = (event: React.KeyboardEvent) => {
-        console.log('Clear element selection')
-    }
-
     return (
-        <div ref={slideRef} style={slideStyles} className={styles.slide} onKeyDown={onClearElementSelection}>
+        <div ref={slideRef} style={slideStyles} className={styles.slide}>
             {slide.objects.map(object => {
                 return (
                     <SlideObject

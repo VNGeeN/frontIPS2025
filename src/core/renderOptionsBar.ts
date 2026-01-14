@@ -1,13 +1,12 @@
 import { type Editor } from "./types/editorTypes";
-import { type OptionsBarState } from './types/editorTypes'
+import { RenderOptionsBarAction } from "./redux/actions";
 
-function renderOptionsBar(editor: Editor, newState: OptionsBarState): Editor {
-    console.log('editor', editor)
+function renderOptionsBar(editor: Editor, action: RenderOptionsBarAction): Editor {
     return {
         ...editor,
         interfaceState: {
             ...editor.interfaceState,
-            optionsBarState: newState
+            optionsBarState: action.payload
         }
     }
 }

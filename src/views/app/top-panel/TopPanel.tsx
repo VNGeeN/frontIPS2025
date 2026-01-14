@@ -1,24 +1,16 @@
-import { type EditBarState } from './../../../core/types/editorTypes'
-import { type OptionsBarState } from './../../../core/types/editorTypes'
 import { MenuBar } from './menu-bar/MenuBar'
 import { OptionsBar } from './options-bar/OptionsBar'
 import { EditBar } from './edit-bar/EditBar'
 import styles from './TopPanel.module.css'
 
-type TopPanelProps = {
-    optionsBarState: OptionsBarState,
-    editBarState: EditBarState,
-    buffer: boolean
-}
-
-function TopPanel(props: TopPanelProps) {
+function TopPanel() {
     return (
         <div className={styles.topPanel}>
             <div>
                 <MenuBar />
-                <OptionsBar type={props.optionsBarState} />
+                <OptionsBar />
             </div>
-            <EditBar type={props.editBarState} />
+            <EditBar />
         </div>
     )
 }

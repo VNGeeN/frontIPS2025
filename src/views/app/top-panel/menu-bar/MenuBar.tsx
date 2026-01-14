@@ -1,30 +1,27 @@
-import { Button } from '../../../../components/Button'
+import { useAppActions } from "../../../hooks/useAppActions";
 import styles from './MenuBar.module.css'
-
-import { dispatch } from "../../../../core/editor";
-
-import { renderOptionsBar } from '../../../../core/renderOptionsBar'
-
+import { Button } from '../../../../components/Button'
 
 function MenuBar() {
+    const {renderOptionsBar} = useAppActions()
     function openFileOptions() {
-        dispatch(renderOptionsBar, "file")
+        renderOptionsBar("file")
     }
     function openSlideOptions() {
-        dispatch(renderOptionsBar, "slide")
+        renderOptionsBar("slide")
     }
     function openElementOptions() {
-        dispatch(renderOptionsBar, "element")
+        renderOptionsBar("element")
     }
     function openViewModeOptions() {
-        dispatch(renderOptionsBar, "viewmode")
+        renderOptionsBar("viewmode")
     }
     return (
         <div className={styles.menuBar}>
-            <Button className={styles.button} text={'File'} onClick={openFileOptions}></Button>
-            <Button className={styles.button} text={'Slide'} onClick={openSlideOptions}></Button>
-            <Button className={styles.button} text={'Element'} onClick={openElementOptions}></Button>
-            <Button className={styles.button} text={'View mode'} onClick={openViewModeOptions}></Button>
+            <Button className={styles.button} text={'File'} onClick={openFileOptions}/>
+            <Button className={styles.button} text={'Slide'} onClick={openSlideOptions}/>
+            <Button className={styles.button} text={'Element'} onClick={openElementOptions}/>
+            <Button className={styles.button} text={'View mode'} onClick={openViewModeOptions}/>
         </div>
     )
 }

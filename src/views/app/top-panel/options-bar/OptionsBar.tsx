@@ -1,37 +1,57 @@
-import { type OptionsBarState } from '../../../../core/types/editorTypes'
 import { Button } from '../../../../components/Button'
-
 import styles from './OptionsBar.module.css'
+import { useOptionsBarStateSelector } from "../../../hooks/useAppSelector";
+import { useAppActions } from "../../../hooks/useAppActions";
 
-import { dispatch } from "../../../../core/editor";
-
-import { addNewSlide } from '../../../../core/addNewSlide'
-import { deleteSlides } from '../../../../core/deleteSlides'
-import { addNewText } from '../../../../core/addNewText'
-import { addNewImage } from '../../../../core/addNewImage'
-import { deleteElements } from '../../../../core/deleteElements'
-
-type OptionsBarProps = {
-    type: OptionsBarState
-}
-
-function OptionsBar(props: OptionsBarProps) {
+function OptionsBar() {
+    const optionsBarState = useOptionsBarStateSelector()
+    const {addNewSlide} = useAppActions()
+    const {deleteSlides} = useAppActions()
+    const {addNewText} = useAppActions()
+    const {addNewImage} = useAppActions()
+    const {deleteElements} = useAppActions()
+    const {saveJSON} = useAppActions()
+    const {openJSON} = useAppActions()
+    
     function onAddNewSlide() {
-        dispatch(addNewSlide)
+        addNewSlide()
     }
     function onDeleteSlides() {
-        dispatch(deleteSlides)
+        deleteSlides()
     }
     function onAddNewText() {
-        dispatch(addNewText)
+        addNewText()
     }
     function onAddNewImage() {
-        dispatch(addNewImage)
+        addNewImage()
     }
     function onDeleteElements() {
-        dispatch(deleteElements)
+        deleteElements()
     }
-    switch (props.type) {
+    function onSavePresentation() {
+        saveJSON()
+    }
+    function onOpenPresentation(event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0]
+        if (!file) {
+            return
+        }
+        const reader = new FileReader();
+        reader.onload = e => {
+            if (typeof e.target?.result === "string") {
+                const data = JSON.parse(e.target.result)
+                if (!data) {
+                    return
+                }
+                openJSON(data)
+            }
+        }
+        reader.onerror = (e) => {
+            console.error('Ошибка FileReader:', e); 
+        }
+        reader.readAsText(file)
+    }
+    switch (optionsBarState) {
         case "slide":
             return (
                 <div className={styles.optionsBar}>
@@ -59,9 +79,16 @@ function OptionsBar(props: OptionsBarProps) {
             return (
                 <div className={styles.optionsBar}>
                     <Button className={styles.button} text={'Create new'} onClick={() => { }}></Button>
-                    <Button className={styles.button} text={'Open'} onClick={() => { alert("Hello") }}></Button>
+                    <div className={styles.inputFile}>
+                        <input
+                            className={styles.hiddenInput}
+                            type={"file"}
+                            onChange={ onOpenPresentation }
+                        />
+                        Open
+                    </div>
                     <Button className={styles.button} text={'Export as PDF'} onClick={() => { }}></Button>
-                    <Button className={styles.button} text={'Save'} onClick={() => { }}></Button>
+                    <Button className={styles.button} text={'Save'} onClick={onSavePresentation}></Button>
                     <Button className={styles.button} text={'Close'} onClick={() => { }}></Button>
                 </div>
             )

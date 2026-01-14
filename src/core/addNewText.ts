@@ -1,11 +1,9 @@
 import { type Editor } from "./types/editorTypes";
-import { SLIDE_WIDTH } from "../views/presentation/slide/Slide";
-import { SLIDE_HEIGHT } from "../views/presentation/slide/Slide";
+import { SLIDE_WIDTH, SLIDE_HEIGHT } from "../views/presentation/slide/Slide";
 import { type TextObject } from "./types/presentationTypes";
-import { defaultTextElement } from "./functions/functions";
+import { defaultTextElement } from "./functions/functions"
 
 function addNewText(editor: Editor): Editor {
-    console.log('editor', editor)
     if (editor.slideSelection.length <= 0 || editor.presentation.slides.length <= 0) {
         return editor
     }

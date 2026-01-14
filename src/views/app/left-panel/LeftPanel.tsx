@@ -1,56 +1,55 @@
 import { CSSProperties, useState } from "react";
 import { Slide } from "../../presentation/slide/Slide";
 import styles from './LeftPanel.module.css'
-import { dispatch } from "../../../core/editor";
-import { renamePresentation } from "../../../core/renamePresentation";
-import { addToSlideSelection } from "./../../../core/setSelection";
-import { selectOneSlide } from "./../../../core/setSelection";
-import { setSlidesOrder } from "../../../core/setSlidesOrder";
-
-type LeftPanelProps = {
-    title: string,
-    slides: Slide[],
-    slideSelection: string[]
-}
+ import { useTitleSelector, useSlideSelectionSelector, useSlidesSelector } from "../../hooks/useAppSelector";
+import { useAppActions } from "../../hooks/useAppActions";
 
 const SLIDE_PREVIEW_SCALE = 0.2
 
-function LeftPanel(props: LeftPanelProps) {
+function LeftPanel() {
+    const title = useTitleSelector()
+    const slideSelection = useSlideSelectionSelector()
+    const slides = useSlidesSelector()
+
+    const { addToSlideSelection } = useAppActions()
+    const { selectOneSlide } = useAppActions()
+    const { renamePresentation } = useAppActions()
+    const { setSlidesOrder } = useAppActions()
     const onRenamePresentation: React.ChangeEventHandler = (event) => {
-        dispatch(renamePresentation, (event.target as HTMLInputElement).value)
+        renamePresentation((event.target as HTMLInputElement).value)
     }
     const onSlideClick = (slideId: string, event: React.MouseEvent) => {
         if (event.ctrlKey) {
-            dispatch(addToSlideSelection, slideId)
+            addToSlideSelection(slideId)
         } else {
-            dispatch(selectOneSlide, slideId)
+            selectOneSlide(slideId)
         }
     }
     const [currentSlide, setCurrentSlide] = useState<Slide | null>(null)
-    const dragStartHandler = (event: React.DragEvent<HTMLDivElement>, slide: Slide) => {
+    const dragStartHandler = (slide: Slide) => {
         setCurrentSlide(slide)
     }
-    const dragOverHandler = (event: React.DragEvent<HTMLDivElement>) => {
+    const dragOverHandler = (event: any) => {
         event.preventDefault()
     }
-    const dropHandler = (event: React.DragEvent<HTMLDivElement>, slide: Slide) => {
+    const dropHandler = (event: any, slide: Slide) => {
         event.preventDefault()
         if (currentSlide == null) return
-        const payload: { dragSlideId: string, dropSlideId: string } = {
+        const draggableSlides: { dragSlideId: string, dropSlideId: string } = {
             dragSlideId: currentSlide?.id,
             dropSlideId: slide.id
         }
-        dispatch(setSlidesOrder, payload)
+        setSlidesOrder(draggableSlides)
     }
     return (
         <div>
             <p className={styles.inputTitleLabel}>Change project name</p>
-            <input type='text' className={styles.inputPresentationTitle} value={props.title} onChange={onRenamePresentation} />
+            <input type='text' className={styles.inputPresentationTitle} value={title} onChange={onRenamePresentation} />
             <div className={styles.leftPanel}>
-                {props.slides.map((slide, i) => {
+                {slides.map((slide, i) => {
                     const inlineStyles: CSSProperties = {}
                     let isSlideSelected = false
-                    props.slideSelection.forEach((element) => {
+                    slideSelection.forEach((element) => {
                         if (element === slide.id) {
                             isSlideSelected = true
                         }
@@ -60,10 +59,10 @@ function LeftPanel(props: LeftPanelProps) {
                     }
                     return <div
                         key={slide.id}
-                        onDragStart={(event) => dragStartHandler(event, slide)}
+                        onDragStart={() => dragStartHandler(slide)}
                         onDragOver={(event) => dragOverHandler(event)}
                         onDrop={(event) => dropHandler(event, slide)}
-                        onClick={(event) => {onSlideClick(slide.id, event)}}
+                        onClick={(event) => { onSlideClick(slide.id, event) }}
                         draggable={true}
                         style={inlineStyles}
                         className={styles.slidePreviewContainer}

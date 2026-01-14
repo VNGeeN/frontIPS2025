@@ -1,8 +1,8 @@
 import { type Editor } from "./types/editorTypes";
 import { type SolidBackground } from "./types/presentationTypes";
+import { SetSlideBackgroundColorAction } from "./redux/actions";
 
-
-function setSlideBackgroundColor(editor: Editor, backgroundColor: string): Editor {
+function setSlideBackgroundColor(editor: Editor, action: SetSlideBackgroundColorAction): Editor {
     function setBackground(colorStr: string): SolidBackground {
         return {
             type: "solid",
@@ -10,7 +10,7 @@ function setSlideBackgroundColor(editor: Editor, backgroundColor: string): Edito
         }
     }
     const newSlides = structuredClone(editor.presentation.slides)
-    if (backgroundColor === "") {
+    if (action.payload === "") {
         return {
             ...editor,
         }
@@ -18,11 +18,10 @@ function setSlideBackgroundColor(editor: Editor, backgroundColor: string): Edito
     newSlides.forEach((slide) => {
         editor.slideSelection.forEach((idStr) => {
             if (slide.id === idStr) {
-                slide.background = setBackground(backgroundColor)
+                slide.background = setBackground(action.payload)
             }
         })
     })
-
     return {
         ...editor,
         presentation: {

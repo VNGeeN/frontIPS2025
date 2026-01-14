@@ -1,22 +1,20 @@
 import { Slide } from "../../presentation/slide/Slide";
 import styles from './WorkSpace.module.css'
-
-type WorkSpaceProps = {
-    slides: Array<Slide>,
-    slideSelection: string[],
-    elementSelection: string[],
-}
+import { useSlidesSelector, useSlideSelectionSelector } from "../../hooks/useAppSelector";
 
 const SLIDE_WORKSPACE_SCALE = 1
 
-function WorkSpace(props: WorkSpaceProps) {
-    if (props.slides.length <= 0) {
+function WorkSpace() {
+    const slides = useSlidesSelector()
+    const slideSelection = useSlideSelectionSelector()
+
+    if (slides.length <= 0) {
         return <></>
     }
     let currentSlideIndex: number = 0
-    if (props.slideSelection.length > 0) {
-        currentSlideIndex = props.slides.findIndex((slide) => {
-            return slide.id === props.slideSelection[props.slideSelection.length - 1]
+    if (slideSelection.length > 0) {
+        currentSlideIndex = slides.findIndex((slide) => {
+            return slide.id === slideSelection[slideSelection.length - 1]
         })
     }
     if (currentSlideIndex === -1) {
@@ -25,9 +23,8 @@ function WorkSpace(props: WorkSpaceProps) {
     return (
         <div className={styles.workSpace}>
             <Slide
-                slide={props.slides[currentSlideIndex]}
+                slide={slides[currentSlideIndex]}
                 scale={SLIDE_WORKSPACE_SCALE}
-                elementSelection={props.elementSelection}
             />
         </div>
     )

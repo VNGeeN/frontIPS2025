@@ -1,7 +1,8 @@
 import { type Editor } from "./types/editorTypes";
 import { Position } from "./types/presentationTypes";
+import { ChangeSlideObjectPositionAction } from "./redux/actions";
 
-function changeSlideObjectPosition(editor: Editor, newPosition: Position): Editor {
+function changeSlideObjectPosition(editor: Editor, action: ChangeSlideObjectPositionAction): Editor {
     function modifyPosition(position: Position, newPos: Position): Position {
         position.x = newPos.x
         position.y = newPos.y
@@ -23,7 +24,7 @@ function changeSlideObjectPosition(editor: Editor, newPosition: Position): Edito
                         }
                         return {
                             ...object,
-                            position: modifyPosition(structuredClone(object.position), newPosition)
+                            position: modifyPosition(structuredClone(object.position), action.payload)
                         }
                     })
                 }

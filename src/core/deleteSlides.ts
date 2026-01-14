@@ -2,7 +2,6 @@ import { type Editor } from "./types/editorTypes";
 import { type Slide } from "./types/presentationTypes";
 
 function deleteSlides(editor: Editor): Editor {
-    console.log('editor', editor)
     if (editor.slideSelection.length <= 0) {
         return editor
     }

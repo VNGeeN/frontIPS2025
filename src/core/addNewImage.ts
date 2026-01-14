@@ -5,7 +5,6 @@ import { type ImageObject } from "./types/presentationTypes";
 import { defaultImageElement } from "./functions/functions";
 
 function addNewImage(editor: Editor): Editor {
-    console.log('editor', editor)
     if (editor.slideSelection.length <= 0 || editor.presentation.slides.length <= 0) {
         return editor
     }

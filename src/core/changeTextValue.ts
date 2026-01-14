@@ -1,7 +1,7 @@
 import { type Editor } from "./types/editorTypes";
+import { type ChangeTextValueAction } from "./redux/actions";
 
-function changeTextValue(editor: Editor, newValue: string): Editor {
-    
+function changeTextValue(editor: Editor, action: ChangeTextValueAction): Editor {
     return {
         ...editor,
         presentation: {
@@ -18,7 +18,7 @@ function changeTextValue(editor: Editor, newValue: string): Editor {
                         }
                         return {
                             ...object,
-                            value: newValue
+                            value: action.payload
                         }
                     })
                 }

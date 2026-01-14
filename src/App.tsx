@@ -1,30 +1,28 @@
 import './App.css'
-import { type Editor } from './core/types/editorTypes'
-
+import { useEffect } from 'react'
 import { TopPanel } from './views/app/top-panel/TopPanel'
 import { LeftPanel } from './views/app/left-panel/LeftPanel'
 import { WorkSpace } from './views/app/workspace/WorkSpace'
+import { useAppActions } from "./views/hooks/useAppActions";
 
-type AppProps = {
-  editor: Editor,
-}
-
-function App({ editor }: AppProps) {
-
-  // useEffect(() => {
-  //   function handleScroll(e) {
-  //     console.log(window.scrollX, window.scrollY);
-  //   }
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
+function App() {
+  const { clearElementSelection } = useAppActions()
+  useEffect(() => {
+    function onClearElementSelection(event: KeyboardEvent) {
+      if ((event.key === "Escape" || event.keyCode === 27) && !event.shiftKey && !event.ctrlKey && !event.altKey) {
+        clearElementSelection()
+      }
+    }
+    window.addEventListener('keydown', onClearElementSelection);
+    return () => window.removeEventListener('keydown', onClearElementSelection);
+  }, []);
 
   return (
     <div>
-      <TopPanel optionsBarState={editor.interfaceState.optionsBarState} editBarState={editor.interfaceState.editBarState} buffer={editor.interfaceState.buffer} />
+      <TopPanel />
       <div className='mainSpace'>
-        <LeftPanel title={editor.presentation.title} slides={editor.presentation.slides} slideSelection={editor.slideSelection} />
-        <WorkSpace slides={editor.presentation.slides} slideSelection={editor.slideSelection} elementSelection={editor.elementSelection} />
+        <LeftPanel />
+        <WorkSpace />
       </div>
     </div>
   )
