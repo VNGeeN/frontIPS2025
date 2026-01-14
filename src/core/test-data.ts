@@ -24,7 +24,7 @@ const elem2: TextObject = {
     fontFamily: "Montserrat",
     fontSize: 30,
     fontWeight: 400,
-    fontColor: "#ff0000",
+    fontColor: "#00ff15ff",
     id: "2",
     position: {
         x: 180,
@@ -72,7 +72,7 @@ const elem5: TextObject = {
     fontFamily: "Montserrat",
     fontSize: 30,
     fontWeight: 400,
-    fontColor: "#ff0000",
+    fontColor: "#0c445adc",
     id: "5",
     position: {
         x: 300,
@@ -89,7 +89,7 @@ const elem6: TextObject = {
     fontFamily: "Arial",
     fontSize: 30,
     fontWeight: 400,
-    fontColor: "#00FF00",
+    fontColor: "#ff000098",
     id: "6",
     position: {
         x: 200,
@@ -125,7 +125,7 @@ const slide2: Slide = {
     id: "2",
     background: {
         type: "solid",
-        color: "#ffff00"
+        color: "#9faf00"
     },
     objects: [elem4, elem5, elem6]
 }
@@ -133,7 +133,7 @@ const slide3: Slide = {
     id: "3",
     background: {
         type: "solid",
-        color: "#00ff00"
+        color: "#0400ffff"
     },
     objects: []
 }
@@ -141,7 +141,7 @@ const slide4: Slide = {
     id: "4",
     background: {
         type: "solid",
-        color: "#ff0000"
+        color: "#cc24ccff"
     },
     objects: []
 }
@@ -149,7 +149,7 @@ const slide5: Slide = {
     id: "5",
     background: {
         type: "solid",
-        color: "#ff00ff"
+        color: "#a86c1d8c"
     },
     objects: []
 }

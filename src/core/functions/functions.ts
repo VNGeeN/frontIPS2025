@@ -331,8 +331,8 @@ export const defaultImageElement: ImageObject = {
     y: 0,
   },
   size: {
-    width: 0,
-    height: 0
+    width: 200,
+    height: 200
   }
 };
 

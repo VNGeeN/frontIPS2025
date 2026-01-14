@@ -1,6 +1,6 @@
 import { type Editor } from "./types/editorTypes";
-import { SLIDE_WIDTH } from "../views/presentation/slide/Slide";
-import { SLIDE_HEIGHT } from "../views/presentation/slide/Slide";
+import { SLIDE_WIDTH } from "../views/presentation/slide/SlideConst";
+import { SLIDE_HEIGHT } from "../views/presentation/slide/SlideConst";
 import { type ImageObject } from "./types/presentationTypes";
 import { defaultImageElement } from "./functions/functions";
 
