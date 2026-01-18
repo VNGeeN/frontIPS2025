@@ -1,15 +1,8 @@
 #root {
   width: 100vw;
   height: 100vh;
-  padding: 15px;
   text-align: center;
-  background-color: #ebfec86d;
+  /* background-color: #a4c3a2b3; */
+  background: linear-gradient(135deg, #a4c3a2b3, #f6e29f);
   user-select: none;
-}
-
-.mainSpace {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
 }

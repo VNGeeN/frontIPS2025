@@ -1,0 +1,56 @@
+import { SlideObjectProperties, type Position } from "../../types/presentationTypes"
+import { ActionType } from "../actions"
+
+function deleteElements() {
+    return {
+        type: ActionType.DELETE_ELEMENTS,
+    }
+}
+
+function changeSlideObjectPosition(newPosition: Position) {
+    return {
+        type: ActionType.CHANGE_SLIDE_OBJECT_POSITION,
+        payload: newPosition
+    }
+}
+
+function changeSlideObjectPositionAndSize(newData: SlideObjectProperties) {
+    return {
+        type: ActionType.CHANGE_SLIDE_OBJECT_POSITION_AND_SIZE,
+        payload: newData
+    }
+}
+
+function incSlideObjectLayer() {
+    return {
+        type: ActionType.INC_SLIDE_OBJECT_LAYER,
+    }
+}
+
+function decSlideObjectLayer() {
+    return {
+        type: ActionType.DEC_SLIDE_OBJECT_LAYER,
+    }
+}
+
+function copyElements() {
+    return {
+        type: ActionType.COPY_ELEMENTS,
+    }
+}
+
+function pasteElements() {
+    return {
+        type: ActionType.PASTE_ELEMENTS,
+    }
+}
+
+export {
+    deleteElements,
+    changeSlideObjectPosition,
+    incSlideObjectLayer,
+    decSlideObjectLayer,
+    changeSlideObjectPositionAndSize,
+    copyElements,
+    pasteElements
+}

@@ -4,19 +4,16 @@ import App from './App'
 import './index.css'
 import { Provider } from 'react-redux';
 import { store } from './core/redux/store';
-import { addEditorChangeHandler, getEditor } from "./core/editor";
-
 
 const root = createRoot(document.getElementById('root')!)
 function render() {
     root.render(
         <StrictMode>
             <Provider store={store}>
-                <App/>
+                <App />
             </Provider>
         </StrictMode>,
     )
 }
 
-addEditorChangeHandler(render)
 render()

@@ -1,0 +1,96 @@
+.editBar {
+  position: relative;
+  margin-left: 50px;
+  text-align: center;
+  transition: all 0.2s ease-out;
+}
+
+.editBarTitle {
+  text-align: center;
+  font: 400 16px/22px Montserrat, sans-serif;
+  padding: 8px 16px;
+  background-color: #e4e4e4;
+  border-radius: 7px 7px 0 0;
+}
+
+.buttonEditbarActive {
+  background-color: #e4e4e4;
+  font-weight: 700;
+  border-radius: 7px;
+  box-shadow: 2px 2px 10px #414141;
+}
+
+.buttonEditbar:hover {
+  background-color: #e4e4e4;
+  font-weight: 700;
+  border-radius: 7px;
+  box-shadow: 2px 2px 10px #414141;
+}
+
+.inputColorTitle {
+  all: initial;
+  font: 400 16px/22px Montserrat, sans-serif;
+  cursor: default;
+  padding: 8px 5px 8px 16px;
+}
+
+.inputColor {
+  border: none;
+  height: 34px;
+  width: 34px;
+  margin-left: 2px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.inputColor:hover {
+  background-color: #e4e4e4;
+}
+
+.buttonsContainer {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inputImage {
+  all: initial;
+  position: relative;
+  display: inline-block;
+  font: 400 16px/22px Montserrat, sans-serif;
+  padding: 8px 16px;
+}
+
+.inputImage:hover {
+  background-color: #e4e4e4;
+}
+
+.hiddenInput {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  left: 0px;
+  bottom: 0;
+  opacity: 0;
+}
+
+.selectButton {
+  all: initial;
+  font: 400 16px/22px Montserrat, sans-serif;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: all 0.2s ease-out;
+  border-radius: 7px;
+}
+
+.selectButton:hover {
+  background-color: #e4e4e4;
+  font-weight: 700;
+  box-shadow: 2px 2px 10px #414141;
+}
+
+.buttonWithDropdown {
+  position: relative;
+  display: inline-block;
+}

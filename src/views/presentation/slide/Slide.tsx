@@ -2,8 +2,7 @@ import { CSSProperties, useEffect, useRef } from "react";
 import { type Slide, type Position } from "../../../core/types/presentationTypes";
 import { SlideObject } from "../slide-object/SlideObject";
 import styles from './Slide.module.css'
-import { useElementSelectionSelector } from "../../hooks/useAppSelector";
-import {SLIDE_HEIGHT, SLIDE_WIDTH} from './SlideConst'
+import { SLIDE_HEIGHT, SLIDE_WIDTH } from './SlideConst'
 
 // const SLIDE_WIDTH = 935
 // const SLIDE_HEIGHT = 525
@@ -11,32 +10,25 @@ import {SLIDE_HEIGHT, SLIDE_WIDTH} from './SlideConst'
 type SlideProps = {
     slide: Slide,
     scale: number,
+    elementSelection: string[],
 }
 
-let slideStart: Position = {
-    x: 0,
-    y: 0,
-}
-
-function Slide({ slide, scale}: SlideProps) {
-    const elementSelection = useElementSelectionSelector()
-    const isElementSelected = (array: string[] | undefined, objectId: string): boolean | undefined => {
-        let selected: boolean = false
-        array?.forEach((element) => {
-            if (element === objectId) {
-                selected = true
-            }
-        })
-        return selected
+function Slide({ slide, scale, elementSelection }: SlideProps) {
+    const isElementSelected = (array: string[] | undefined, objectId: string): boolean => {
+        return array?.includes(objectId) || false
     }
+
     const slideRef = useRef<HTMLDivElement>(null)
+    const slideStartRef = useRef<Position>({ x: 0, y: 0 })
+
     useEffect(() => {
         let rect = slideRef.current?.getBoundingClientRect()
         if (rect) {
-            slideStart.x = rect.x
-            slideStart.y = rect.y
+            slideStartRef.current.x = rect.x
+            slideStartRef.current.y = rect.y
         }
     }, [])
+
     let slideStyles: CSSProperties = {}
     switch (slide.background.type) {
         case "solid":
@@ -56,6 +48,13 @@ function Slide({ slide, scale}: SlideProps) {
                 height: `${SLIDE_HEIGHT * scale}px`,
             }
             break
+        case "gradient":
+            slideStyles = {
+                background: `linear-gradient(${slide.background.angle}deg, ${slide.background.colorOne}, ${slide.background.colorTwo})`,
+                width: `${SLIDE_WIDTH * scale}px`,
+                height: `${SLIDE_HEIGHT * scale}px`,
+            }
+            break
         default:
             throw new Error(`Unknown background type on slide: ${slide.id}`)
     }
@@ -69,6 +68,7 @@ function Slide({ slide, scale}: SlideProps) {
                         object={object}
                         scale={scale}
                         isSelected={isElementSelected(elementSelection, object.id)}
+                        slideStart={slideStartRef}
                     />
                 )
             }
@@ -81,5 +81,4 @@ export {
     Slide,
     SLIDE_WIDTH,
     SLIDE_HEIGHT,
-    slideStart
 }

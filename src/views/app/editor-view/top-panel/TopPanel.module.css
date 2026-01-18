@@ -1,0 +1,6 @@
+.topPanel {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    grid-row: 1/2;
+}
